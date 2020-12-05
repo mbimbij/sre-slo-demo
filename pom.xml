@@ -16,6 +16,9 @@
 
 	<properties>
 		<java.version>14</java.version>
+		<gatling.version>3.3.1</gatling.version>
+		<gatling-maven-plugin.version>3.0.5</gatling-maven-plugin.version>
+		<scala-maven-plugin.version>4.4.0</scala-maven-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -54,6 +57,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>io.gatling.highcharts</groupId>
+			<artifactId>gatling-charts-highcharts</artifactId>
+			<version>${gatling.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -61,6 +69,40 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>io.gatling</groupId>
+				<artifactId>gatling-maven-plugin</artifactId>
+				<version>${gatling-maven-plugin.version}</version>
+				<configuration>
+					<simulationsFolder>src/test-perfs/scala</simulationsFolder>
+					<runMultipleSimulations>true</runMultipleSimulations>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>scala-maven-plugin</artifactId>
+				<version>${scala-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+						<configuration>
+							<jvmArgs>
+								<jvmArg>-Xss100M</jvmArg>
+							</jvmArgs>
+							<args>
+								<arg>-target:jvm-1.8</arg>
+								<arg>-deprecation</arg>
+								<arg>-feature</arg>
+								<arg>-unchecked</arg>
+								<arg>-language:implicitConversions</arg>
+								<arg>-language:postfixOps</arg>
+							</args>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

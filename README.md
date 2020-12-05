@@ -26,7 +26,12 @@ L'application expose automatiquement, pour tous les endpoints REST:
   - prometheus: `http_server_requests_seconds_max`
 
 Ces statistiques sont calculées, côté appli, pour une fenêtre de temps définies dans la propriété: 
-``
+`application.percentiles-window-duration-seconds`
+
+## requêtes prometheus / grafana
+
+- SLI endpoint "hello" : promql : `http_server_requests_seconds{uri="/hello"}`
+- non-compliance (99p > 500ms): promql: `http_server_requests_seconds{uri="/hello", quantile="0.99"} > bool 0.5`
 
 # :gb: poc / demo SLO
 
