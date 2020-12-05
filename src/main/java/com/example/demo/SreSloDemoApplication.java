@@ -1,22 +1,15 @@
 package com.example.demo;
 
-import io.micrometer.core.annotation.Timed;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @SpringBootApplication
-@RestController
+@EnableConfigurationProperties(ApplicationConfigurationProperties.class)
 public class SreSloDemoApplication {
 
   public static void main(String[] args) {
     SpringApplication.run(SreSloDemoApplication.class, args);
   }
 
-  @Timed(percentiles = {0.5, 0.9, 0.99})
-  @GetMapping("hello")
-  public String hello() {
-    return "hello";
-  }
 }
