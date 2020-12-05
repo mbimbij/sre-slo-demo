@@ -1,7 +1,7 @@
 :fr: Sommaire / :gb: Table of Contents
 =================
 
-* [French Documentation](#fr-poc--demo-slo)
+* [Documentation en Français](#fr-poc--demo-slo)
 * [English Documentation](#gb-poc--demo-slo)
 
 ---
