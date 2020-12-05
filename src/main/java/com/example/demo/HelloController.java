@@ -18,13 +18,8 @@ public class HelloController {
   @Autowired
   MeterRegistry meterRegistry;
 
-  @GetMapping("hello")
-  public String hello() {
-    return "hello";
-  }
-
   @PostConstruct
-  public void meterRegistry() {
+  public void customizeMeterRegistry() {
     meterRegistry.config().meterFilter(new MeterFilter() {
       @Override
       public DistributionStatisticConfig configure(Meter.Id id, DistributionStatisticConfig config) {
@@ -34,5 +29,10 @@ public class HelloController {
             .merge(config);
       }
     });
+  }
+
+  @GetMapping("hello")
+  public String hello() {
+    return "hello";
   }
 }
